@@ -8,7 +8,6 @@
  * Configuration module for islandora_solr_search.module
  */
 
-
 /**
  * Implements hook_islandora_solr_primary_display()
  */
@@ -38,6 +37,7 @@ function islandora_solr_config_islandora_solr_primary_display() {
       'function' => "displayResults",
       'description' => t('A tabular output for maps. Depends upon the existence of a TN datastream in fedora objects returned as results.')
     ),
+
   );
 }
 
@@ -45,6 +45,9 @@ function islandora_solr_config_islandora_solr_primary_display() {
  * Implements hook_islandora_solr_secondary_display()
  */
 function islandora_solr_config_islandora_solr_secondary_display() {
+  // set path
+  global $base_path;
+  $path = $base_path . drupal_get_path('module', 'islandora_solr_config');
   return array(
     'csv' => array(
       'name' => t('CSV'),
@@ -53,7 +56,7 @@ function islandora_solr_config_islandora_solr_secondary_display() {
       'class' => 'IslandoraSolrResultsCSV',
       'function' => 'printCSV',
       'description' => 'Download complete resultset as a CSV Spreadsheet',
-      'logo' => '<img src="http://www.stdicon.com/crystal/application/vnd.ms-excel?size=32" class="islandora_solr_secondary_display_icon">',
+      'logo' => '<img src="' . $path . '/images/csv.png" class="islandora_solr_secondary_display_icon">',
     ),
   );
 }
@@ -61,7 +64,6 @@ function islandora_solr_config_islandora_solr_secondary_display() {
 /**
  * Implementation of hook_help()
  */
-
 function islandora_solr_config_help($path, $arg) {
 
   switch ($path) {
@@ -75,8 +77,6 @@ function islandora_solr_config_help($path, $arg) {
         <li>Method - displayResults</l1>
         </ul>
         ", array('!page' => l("Islandora_solr_search configuration page", 'admin/settings/islandora_solr_search'),)
-
-
       );
   }
 }
