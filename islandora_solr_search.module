@@ -92,7 +92,7 @@ function islandora_solr_search_menu() {
  */
 function islandora_solr_search_block($op = 'list', $delta = 0, $edit = array()) {
   global $queryClass;
-
+  
   /*
    * Here I need to call a hook which will return module/file/class/method/name/description
    * for blocks which need a queryClass to render.

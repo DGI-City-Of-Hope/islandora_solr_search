@@ -393,7 +393,7 @@ class IslandoraSolrResults {
     $islandora_fq = $solrQueryProcessor->solrFilters;
     //FIXME:  This isn't quite right...  It can make sense to facet on 
     //  the same field multiple times, provided it is multi-valued...
-    $fq = (array)$solrQueryProcessor->solrParams['fq'];
+    $fq = isset($solrQueryProcessor->solrParams['fq']) ? (array) $solrQueryProcessor->solrParams['fq'] : array();
     //FIXME:  This instance of 't' should be changed to format_string for Drupal 7 (not really translateable)
     $filter = t('!key:"!name"', array(
       '!key' => $key,
@@ -401,7 +401,7 @@ class IslandoraSolrResults {
     ));
     
     $disable_link = (array_search($filter, $fq) !== FALSE) || $number == $solrQueryProcessor->solrResult->response->numFound;
-    
+    $filter_include = $filter_exclude = '';
     //$disable_link = strpos($islandora_fq, $key . ':"' .  . '"') !== FALSE; //we don't want a link for this facet as we already used it
     if ($islandora_fq && $islandora_fq != '-') {//there are existing facets in the query
       if ($disable_link) {
