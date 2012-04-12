@@ -159,7 +159,8 @@ class IslandoraSolrQueryProcessor {
     $this->solrStart = max(0, $startPage) * $this->solrLimit;
 
     // The breadcrumb should go in the display class
-    $queryurl = SOLR_SEARCH_PATH . "/" . replaceSlashes($this->solrQuery);
+    list($_url_query, $_url_fq, $_url_params) = explode('/', substr($_GET['q'], strlen('islandora/solr/search/')));
+    $queryurl = SOLR_SEARCH_PATH . "/" . $_url_query;
     $breadcrumb_fq = $islandora_fq;
     $facet = NULL; // Nigelb, This is being used outside of the for loop where it is being created this is probably incorrect.
     if (strcmp($islandora_fq, "-")) {
@@ -168,9 +169,9 @@ class IslandoraSolrQueryProcessor {
         $value = restoreSlashes(trim(drupal_substr($facet, strpos($facet, ":") + 1), '"'));
         $options = array('html' => TRUE);
         $options['attributes']['title'] = $facet;
-        $crumblink = $queryurl . "/" . $breadcrumb_fq . (empty($this->solrDefType) ? '/-' : '/' . $this->solrDefType) . '/' . $display_param;
+        $crumblink = $queryurl . "/" . $breadcrumb_fq . '/' . $_url_params;
         $cut_fq = $this->delete_filter($islandora_fq, $facet);
-        $cutlink = $queryurl . "/" . $cut_fq . (empty($this->solrDefType) ? '/-' : '/' . $this->solrDefType) . '/' . $display_param;
+        $cutlink = $queryurl . "/" . $cut_fq . '/' . $_url_params;
         if (!strncmp("-", $facet, 1)) {
           $options['attributes']['class'] = "strikethrough";
         }

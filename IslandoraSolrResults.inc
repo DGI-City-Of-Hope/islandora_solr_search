@@ -389,6 +389,7 @@ class IslandoraSolrResults {
     $this->allSubsArray = array_merge($this->facetFieldArray, $this->searchFieldArray, $this->resultFieldArray);
   }
   
+  /*
   function _addFacets(&$key, &$name, &$number, &$solrQueryProcessor, &$facet_count, &$list, $display_param) {
     $islandora_fq = $solrQueryProcessor->solrFilters;
     //FIXME:  This isn't quite right...  It can make sense to facet on 
@@ -401,7 +402,7 @@ class IslandoraSolrResults {
     ));
     
     $disable_link = (array_search($filter, $fq) !== FALSE) || $number == $solrQueryProcessor->solrResult->response->numFound;
-    $filter_include = $filter_exclude = '';
+    $filter_include = $filter_exclude ='';
     //$disable_link = strpos($islandora_fq, $key . ':"' .  . '"') !== FALSE; //we don't want a link for this facet as we already used it
     if ($islandora_fq && $islandora_fq != '-') {//there are existing facets in the query
       if ($disable_link) {
@@ -452,7 +453,7 @@ class IslandoraSolrResults {
       $facet_count += 1;
     }
   }
-
+*/
   /**
    * Function: displayFacets
    *
